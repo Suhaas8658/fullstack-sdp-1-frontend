@@ -168,7 +168,9 @@ const FarmerDashboard = ({ farmer, view, onBack }) => {
 
           <input
             type="number"
+            inputMode="numeric"
             className="input"
+            placeholder="Quantity (e.g. 90)"
             value={qty}
             onChange={e => setQty(Number(e.target.value))}
           />
