@@ -1,0 +1,504 @@
+:root {
+  --bg: #f3f4f6;
+  --bg-card: #ffffff;
+  --accent: #16a34a;
+  --accent-soft: rgba(22, 163, 74, 0.12);
+  --accent-dark: #065f46;
+  --text-main: #0f172a;
+  --text-muted: #6b7280;
+  --border-subtle: #e5e7eb;
+  --radius-lg: 20px;
+  --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.16);
+  --auth-form-max: min(100%, 34rem);
+  --auth-input-radius: 14px;
+  /* Dashboard uses full width; small gutters only */
+  --dashboard-pad-x: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #dbeafe 0, #f9fafb 45%, #e5e7eb 100%);
+  color: var(--text-main);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.85rem var(--dashboard-pad-x) 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Full-width dashboard — form and cards span the screen (minus small gutters) */
+.app-container {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  background: radial-gradient(circle at top left, #22c55e1f 0, #ffffff 55%);
+  border-radius: clamp(12px, 1.5vw, 20px);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1rem, 2.5vw, 1.5rem) 1.5rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: 18px;
+  border: 1px solid var(--border-subtle);
+  padding: clamp(1.35rem, 2.5vw, 1.65rem) clamp(1.25rem, 2.5vw, 1.5rem);
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+/* Dashboard / buyer / admin forms: roomier fields, matches auth polish */
+.app-container .input,
+.app-container .textarea,
+.app-container .select {
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  min-height: 3.1rem;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.app-container .textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+}
+
+.app-container .input:focus,
+.app-container .textarea:focus,
+.app-container .select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  background: #ffffff;
+}
+
+.app-container form {
+  display: grid;
+  gap: 0.75rem !important;
+}
+
+.app-container .button:not(.secondary) {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+  padding: 0.9rem 1.35rem;
+  box-shadow: 0 14px 32px rgba(22, 163, 74, 0.35);
+}
+
+.card + .card {
+  margin-top: 0.9rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.02em;
+}
+
+.text-muted {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.chip-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.22rem 0.8rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.chip-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: #f9fafb;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  outline: none;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+  background: #ffffff;
+}
+
+.button {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ecfdf3;
+  box-shadow: 0 18px 30px rgba(22, 163, 74, 0.4);
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--accent-dark);
+  border: 1px solid var(--accent-soft);
+  box-shadow: none;
+}
+
+.cart-button {
+  padding: 0.72rem 1rem;
+  border-radius: 999px;
+}
+
+.cart-button:hover {
+  background: rgba(22, 163, 74, 0.08);
+}
+
+.error {
+  color: #dc2626;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.stat-card {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0.1rem;
+}
+
+.product-list {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.product-row {
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  background: #f9fafb;
+  padding: 0.7rem 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.quantity-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0.85rem;
+  padding: 0.35rem 0.45rem;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+}
+
+.quantity-button {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  background: #f8fafc;
+  color: var(--accent-dark);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-button:hover {
+  background: rgba(22, 163, 74, 0.12);
+}
+
+.quantity-value {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.product-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.product-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+/* ----- Authentication: split layout (image | white form) ----- */
+.auth-page {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.auth-split {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+/* Left: previous agriculture photo (wheat / field) */
+.auth-visual {
+  flex: 1 1 50%;
+  min-width: 0;
+  min-height: 0;
+  background-color: #4a5568;
+  background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Right: full-height white panel — form dead center, generous safe area */
+.auth-panel {
+  flex: 1 1 50%;
+  min-width: 0;
+  min-height: 0;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 5vmin, 3.5rem) clamp(1.75rem, 4vw, 3rem);
+  box-shadow: none;
+}
+
+.auth-form-shell {
+  width: var(--auth-form-max);
+  max-width: 100%;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Large, neat form column (reference layout) */
+.auth-form-shell .card {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 0;
+  padding: clamp(2rem, 4vmin, 3rem) clamp(1.75rem, 3.5vw, 2.5rem);
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Logo circle a bit bigger (2.75rem) */
+.auth-form-shell .chip-logo {
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* “Welcome Back” — clamp(1.75rem … 2.125rem), bold, tighter letter-spacing */
+.auth-form-shell h2 {
+  font-size: clamp(1.75rem, 4vmin, 2.125rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+/* Subtitle slightly larger, #64748b */
+.auth-form-shell h2 + .text-muted {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #64748b;
+  margin-bottom: 0.15rem;
+}
+
+/* Form spacing: gap 1.15rem + margin-top 1.35rem (!important beats LoginForm inline) */
+.auth-form-shell form {
+  display: grid !important;
+  margin-top: 1.35rem !important;
+  gap: 1.15rem !important;
+}
+
+/*
+  All auth inputs: 14px radius, 1rem text, ~3.35rem min-height,
+  padding 1rem / 1.15rem (vertical / horizontal)
+*/
+.auth-form-shell .input,
+.auth-form-shell .textarea {
+  padding: 1rem 1.15rem;
+  font-size: 1rem;
+  min-height: 3.35rem;
+  border-radius: var(--auth-input-radius); /* 14px */
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: var(--text-main);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-form-shell .input::placeholder,
+.auth-form-shell .textarea::placeholder {
+  color: #94a3b8;
+}
+
+.auth-form-shell .input:focus,
+.auth-form-shell .textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  background: #ffffff;
+}
+
+.auth-form-shell .textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+/* Sign In / Get Started: pill, 1.05rem font, stronger green shadow */
+.auth-form-shell button.button[type='submit'] {
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ffffff;
+  box-shadow: 0 16px 40px rgba(22, 163, 74, 0.42);
+}
+
+.auth-form-shell button.button[type='submit']:hover:not(:disabled) {
+  filter: brightness(1.04);
+}
+
+.auth-form-shell button.button[type='submit']:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* “Register as Farmer” row: 1.35rem top margin, 0.95rem text */
+.auth-form-shell .card > div:last-child {
+  margin-top: 1.35rem !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .auth-split {
+    flex-direction: column;
+  }
+
+  .auth-visual {
+    flex: 0 0 28vh;
+    max-height: 32vh;
+  }
+
+  .auth-panel {
+    flex: 1 1 auto;
+    box-shadow: none;
+    min-height: 0;
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .auth-form-shell {
+    max-width: 100%;
+  }
+}
+
+@media (max-height: 760px) {
+  .auth-panel {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .auth-form-shell .card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .auth-form-shell h2 {
+    font-size: 1.5rem;
+  }
+
+  .auth-form-shell .input,
+  .auth-form-shell .textarea {
+    min-height: 3rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .auth-form-shell form {
+    margin-top: 1rem !important;
+    gap: 0.95rem !important;
+  }
+}
