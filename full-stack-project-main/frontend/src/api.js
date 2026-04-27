@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL =  "https://fullstack-sdp-1-backend-production-0f36.up.railway.app/api"
 
 /* ---------------- USERS ---------------- */
 

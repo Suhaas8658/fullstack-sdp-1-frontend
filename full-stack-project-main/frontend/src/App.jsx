@@ -16,6 +16,7 @@ const App = () => {
 
   const showCart = () => setCurrentView('cart');
   const showDashboard = () => setCurrentView('dashboard');
+  const showInventory = () => setCurrentView('inventory');
 
   return (
     <>
@@ -32,11 +33,16 @@ const App = () => {
         </div>
       ) : (
         <div className="app-shell">
-          <Navbar currentUser={currentUser} onLogout={handleLogout} onShowCart={showCart} isCartActive={currentView === 'cart'} />
+          <Navbar currentUser={currentUser} onLogout={handleLogout} onShowCart={showCart} onShowInventory={showInventory} isCartActive={currentView === 'cart'} isInventoryActive={currentView === 'inventory'} />
           <main className="app-main">
             <div className="app-container">
               {currentUser.role === 'FARMER' ? (
-                <FarmerDashboard farmer={currentUser} view={currentView} onBack={showDashboard} />
+                <FarmerDashboard
+                  farmer={currentUser}
+                  view={currentView}
+                  onBack={showDashboard}
+                  onShowCart={showCart}
+                />
               ) : currentUser.role === 'BUYER' ? (
                 <BuyerDashboard buyer={currentUser} view={currentView} onBack={showDashboard} />
               ) : (

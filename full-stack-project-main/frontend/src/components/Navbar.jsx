@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navbar = ({ currentUser, onLogout, onShowCart, isCartActive }) => {
+const Navbar = ({ currentUser, onLogout, onShowCart, onShowInventory, isCartActive, isInventoryActive }) => {
   return (
     <header style={{ padding: '1rem 1.5rem 0.5rem' }}>
       <div
@@ -23,6 +23,15 @@ const Navbar = ({ currentUser, onLogout, onShowCart, isCartActive }) => {
         </div>
         {currentUser ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            {currentUser.role === 'FARMER' && (
+              <button
+                type="button"
+                className={`button secondary cart-button${isInventoryActive ? ' active' : ''}`}
+                onClick={onShowInventory}
+              >
+                Products
+              </button>
+            )}
             <button
               type="button"
               className={`button secondary cart-button${isCartActive ? ' active' : ''}`}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createProduct, fetchProducts, fetchOrders } from '../api';
 
-const FarmerDashboard = ({ farmer, view, onBack }) => {
+const FarmerDashboard = ({ farmer, view, onBack, onShowCart }) => {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [name, setName] = useState('');
@@ -11,6 +11,7 @@ const FarmerDashboard = ({ farmer, view, onBack }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [pricePerUnit, setPricePerUnit] = useState(5);
   const [qty, setQty] = useState(100);
+  const [editPrices, setEditPrices] = useState({});
 
   useEffect(() => {
     fetchProducts().then(setProducts).catch(console.error);
@@ -22,6 +23,45 @@ const FarmerDashboard = ({ farmer, view, onBack }) => {
       setOrders(farmerOrders);
     });
   }, [farmer.id]);
+
+  if (view === 'inventory') {
+    return (
+      <div className="card">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <h3>Inventory</h3>
+            <p className="text-muted">View all your products.</p>
+          </div>
+          <button className="button secondary" type="button" onClick={onBack}>
+            Home
+          </button>
+        </div>
+
+        <div className="product-list" style={{ marginTop: '0.8rem' }}>
+          {products
+            .filter(p => p.farmer && p.farmer.id === farmer.id)
+            .map(p => (
+              <div key={p.id} className="product-row">
+                <div>{p.name}</div>
+                <div>{p.availableQuantity} units</div>
+                <input
+                  type="number"
+                  className="input"
+                  placeholder="Enter your price"
+                  value={editPrices[p.id] ?? p.pricePerUnit}
+                  onChange={e => setEditPrices(prev => ({ ...prev, [p.id]: Number(e.target.value) }))}
+                  style={{ width: '120px', padding: '0.5rem' }}
+                />
+              </div>
+            ))}
+
+          {products.filter(p => p.farmer && p.farmer.id === farmer.id).length === 0 && (
+            <p className="text-muted">No products yet</p>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   if (view === 'cart') {
     return (
@@ -99,10 +139,12 @@ const FarmerDashboard = ({ farmer, view, onBack }) => {
   return (
     <>
       <div className="card" style={{ marginBottom: '0.8rem' }}>
-        <h3>GreenField Farm</h3>
-        <p className="text-muted">
-          {farmer.location ? `Verified seller • ${farmer.location}` : 'Verified seller • Your region'}
-        </p>
+        <div>
+          <h3>GreenField Farm</h3>
+          <p className="text-muted">
+            {farmer.location ? `Verified seller • ${farmer.location}` : 'Verified seller • Your region'}
+          </p>
+        </div>
 
         <div className="stat-grid" style={{ marginTop: '0.6rem' }}>
           <div className="stat-card">
@@ -157,13 +199,16 @@ const FarmerDashboard = ({ farmer, view, onBack }) => {
             placeholder="Image URL"
             value={imageUrl}
             onChange={e => setImageUrl(e.target.value)}
+            required
           />
 
           <input
             type="number"
             className="input"
+            placeholder="Enter your price"
             value={pricePerUnit}
-            onChange={e => setPricePerUnit(Number(e.target.value))}
+            onChange={e => setPricePerUnit((e.target.value))}
+            required
           />
 
           <input
@@ -172,33 +217,14 @@ const FarmerDashboard = ({ farmer, view, onBack }) => {
             className="input"
             placeholder="Quantity (e.g. 90)"
             value={qty}
-            onChange={e => setQty(Number(e.target.value))}
+            onChange={e => setQty((e.target.value))}
+            required
           />
 
           <button className="button" type="submit">
             Publish product
           </button>
         </form>
-      </div>
-
-      <div className="card">
-        <h3>Inventory</h3>
-
-        <div className="product-list">
-          {products
-            .filter(p => p.farmer && p.farmer.id === farmer.id)
-            .map(p => (
-              <div key={p.id} className="product-row">
-                <div>{p.name}</div>
-                <div>{p.availableQuantity} units</div>
-                <div>${p.pricePerUnit}</div>
-              </div>
-            ))}
-
-          {products.filter(p => p.farmer && p.farmer.id === farmer.id).length === 0 && (
-            <p>No products yet</p>
-          )}
-        </div>
       </div>
 
     </>
